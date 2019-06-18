@@ -1,12 +1,12 @@
-sudo : required
-services :
+sudo: requied
+services:
   - docker
 
 before_install :
   - docker build -t superauman/react-test -f ./client/Dockerfile.dev ./client
 
 script :
-  - docker run superauman/react-test npm run test -- --coverage
+  - docker run superauman/react-test npm test -- --coverage
 
 after_success :
   - docker build -t superauman/client ./client
