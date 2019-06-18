@@ -1,20 +1,22 @@
-sudo: requied
+sudo: required
 services:
   - docker
 
-before_install :
+before_install:
   - docker build -t superauman/react-test -f ./client/Dockerfile.dev ./client
 
-script :
+script:
   - docker run superauman/react-test npm test -- --coverage
 
-after_success :
-  - docker build -t superauman/client ./client
-  - docker build -t superauman/nginx ./nginx
-  - docker build -t superauman/server ./server
-  - docker build -t superauman/worker ./worker
+after_success:
+  - docker build -t superauman/multi-client ./client
+  - docker build -t superauman/multi-nginx ./nginx
+  - docker build -t superauman/multi-server ./server
+  - docker build -t superauman/multi-worker ./worker
+  # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push superauman/client
-  - docker push superauman/nginx
-  - docker push superauman/server
-  - docker push superauman/worker
+  # Take those images and push them to docker hub
+  - docker push superauman/multi-client
+  - docker push superauman/multi-nginx
+  - docker push superauman/multi-server
+  - docker push superauman/multi-worker
