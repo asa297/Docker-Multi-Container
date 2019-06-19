@@ -3,20 +3,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t superauman/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t asa297/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run superauman/react-test npm test -- --coverage
+  - docker run asa297/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t superauman/multi-client ./client
-  - docker build -t superauman/multi-nginx ./nginx
-  - docker build -t superauman/multi-server ./server
-  - docker build -t superauman/multi-worker ./worker
+  - docker build -t asa297/multi-client ./client
+  - docker build -t asa297/multi-nginx ./nginx
+  - docker build -t asa297/multi-server ./server
+  - docker build -t asa297/multi-worker ./worker
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push superauman/multi-client
-  - docker push superauman/multi-nginx
-  - docker push superauman/multi-server
-  - docker push superauman/multi-worker
+  - docker push asa297/multi-client
+  - docker push asa297/multi-nginx
+  - docker push asa297/multi-server
+  - docker push asa297/multi-worker
