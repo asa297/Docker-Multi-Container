@@ -1,6 +1,6 @@
 {
   "AWSEBDockerrunVersion": 2,
-  "containerDefinations": [
+  "containerDefinitions": [
     {
       "name": "client",
       "image": "asa297/multi-client",
@@ -25,6 +25,7 @@
     {
       "name": "nginx",
       "image": "asa297/multi-nginx",
+      "hostname": "nginx",
       "essential": true,
       "portMappings": [
         {
